@@ -12,9 +12,8 @@ class GoodSuffixRule
     i = 0
 
     while i < pattern.length && t.length <= pattern.length do
-      overlap = nonterminal[i..(i + t.length - 1)]
-      pairs = overlap.zip(t)
-      all_match = pairs.any? && pairs.all? { |(l, r)| l == r }
+      overlap = nonterminal[i, t.length]
+      all_match = overlap.any? && overlap == t[0, overlap.length]
 
       if all_match
         lookup_table[pattern.length - t.length - 1] = i + 1
